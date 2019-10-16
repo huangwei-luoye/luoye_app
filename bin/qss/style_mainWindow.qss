@@ -1,0 +1,291 @@
+QWidget
+{
+	background-color:#272A39;
+	font: "微软雅黑";
+	color:#FFFFFF;
+}
+
+QLabel#label_Version
+{
+	font: 16pt;
+	background-color:#2F3242;
+	max-height:20px;
+	min-width:100px;
+}
+
+QLabel#label_ProTitle
+{
+	font: 20pt;
+	border-image: url(./images/image/logo.png);
+	background-color:#2F3242;
+	max-height:23px;
+	min-width:100px;
+}
+
+QWidget#widget_Title
+{
+	height:30px;
+	background-color:#2F3242;
+}
+
+QPushButton#pushButton_close
+{
+	min-height:30px;
+	min-width:30px;
+	max-height:30px;
+	max-width:30px;
+	border:0px solid rgb(33, 149, 243);
+	border-radius:5px;
+	background-color:#2F3242;
+	image: url(./images/image/top_icon_off_n.png);
+}
+
+QPushButton#pushButton_close::hover
+{
+	background-color:#2196F3;
+	image: url(./images/image/top_icon_off_h.png);
+}
+QPushButton#pushButton_close::selected
+{
+	border:1px solid rgb(149, 158, 204);
+	image: url(./images/image/top_icon_off_p.png);
+}
+
+QPushButton#pushButton_min
+{
+	min-height:30px;
+	min-width:30px;
+	max-height:30px;
+	max-width:30px;
+	border:0px solid rgb(33, 149, 243);
+	border-radius:5px;
+	background-color:#2F3242;
+	image: url(./images/image/top_icon_small_n.png);
+}
+
+QPushButton#pushButton_min::hover
+{
+	background-color:#2196F3;
+	image: url(./images/image/top_icon_small_h.png);
+}
+QPushButton#pushButton_min::selected
+{
+	border:1px solid rgb(149, 158, 204);
+	image: url(./images/image/top_icon_small_p.png);
+}
+
+QTabWidget>QTabBar::tab
+{
+	font: 16pt;
+	min-height:38px;
+	min-width:240px;
+	background-color:#3A3C52;
+}
+
+QTabWidget>QTabBar::tab:hover
+{
+	background-color:#959ECC;
+}
+
+QTabWidget>QTabBar::tab:selected
+{
+	background-color:#2481CE;
+}
+
+QMessageBox
+{
+	background-color:#272A39;
+}
+
+QMessageBox QLabel
+{
+	background-color:#272A39;
+	font: 10pt;
+}
+
+QMessageBox QPushButton
+{
+	min-height:30px;
+	min-width:68px;
+	max-height:30px;
+	max-width:68px;
+	border:1px solid rgb(33, 149, 243);
+	border-radius:5px;
+}
+
+QMessageBox QPushButton::hover
+{
+	background-color:#2196F3;
+}
+QMessageBox QPushButton::selected
+{
+	border:1px solid rgb(149, 158, 204);
+}
+
+QScrollBar:vertical 
+{
+    background: #3a3e52;
+    width: 16px;
+    margin: 15px 0px 15px 0;
+}
+QScrollBar::handle:vertical 
+{
+    background: #757da4;
+    min-width: 16px;
+	min-height:20px;
+}
+
+QScrollBar::handle:vertical:hover
+{
+    background: #959ECC;
+}
+QScrollBar::handle:vertical:pressed
+{
+    background: #2481ce;
+}
+
+QScrollBar::add-line:vertical 
+{
+    height: 20px;
+    subcontrol-position: bottom;
+    subcontrol-origin: margin;
+	image: url(./images/image/scrollbar_down_n.png);
+}
+
+QScrollBar::add-line:vertical:hover
+{
+	image: url(./images/image/scrollbar_down_h.png);
+}
+QScrollBar::add-line:vertical:pressed
+{
+	image: url(./images/image/scrollbar_down_p.png);
+}
+
+QScrollBar::sub-line:vertical 
+{
+    height: 20px;
+    subcontrol-position: top;
+    subcontrol-origin: margin;
+	image: url(./images/image/scrollbar_up_n.png);
+}
+
+ScrollBar::sub-line:vertical:hover
+{
+	image: url(./images/image/scrollbar_up_h.png);
+}
+
+ScrollBar::sub-line:vertical:pressed
+{
+	image: url(./images/image/scrollbar_up_p.png);
+}
+
+QScrollBar:up-arrow:vertical 
+{
+    width: 15px;
+    height: 15px;
+}
+
+QScrollBar::down-arrow:vertical 
+{
+    width: 15px;
+    height: 15px;
+}
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical 
+{
+    background: #3a3e52;
+}
+
+
+QScrollBar:horizontal 
+{
+    background: #3a3e52;
+    height: 16px;
+    margin: 0px 15px 0 15px;
+}
+QScrollBar::handle:horizontal 
+{
+    background: #757da4;
+    min-width: 16px;
+	min-height:8px;
+}
+
+QScrollBar::handle:horizontal:hover
+{
+    background: #959ECC;
+}
+QScrollBar::handle:horizontal:pressed
+{
+    background: #2481ce;
+}
+
+QScrollBar::add-line:horizontal 
+{
+    width: 20px;
+    subcontrol-position: right;
+    subcontrol-origin: margin;
+	image: url(./images/image/scrollbar_right_n.png);
+}
+
+QScrollBar::add-line:horizontal:hover
+{
+	image: url(./images/image/scrollbar_right_h.png);
+}
+QScrollBar::add-line:horizontal:pressed
+{
+	image: url(./images/image/scrollbar_right_p.png);
+}
+
+QScrollBar::sub-line:horizontal 
+{
+    width: 20px;
+    subcontrol-position: left;
+    subcontrol-origin: margin;
+	image: url(./images/image/scrollbar_left_n.png);
+}
+
+ScrollBar::sub-line:horizontal:hover
+{
+	image: url(./images/image/scrollbar_left_h.png);
+}
+
+ScrollBar::sub-line:horizontal:pressed
+{
+	image: url(./images/image/scrollbar_left_p.png);
+}
+
+QScrollBar:left-arrow:horizontal 
+{
+    width: 15px;
+    height: 15px;
+}
+
+QScrollBar::right-arrow:horizontal 
+{
+    width: 15px;
+    height: 15px;
+}
+
+QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal 
+{
+    background: none;
+}
+
+QRadioButton::indicator:unchecked:disabled 
+{
+    image: url(./images/image/radiobutton_d_2.png);
+}
+QRadioButton::indicator:checked:disabled 
+{
+    image: url(./images/image/radiobutton_d_1.png);
+}
+
+QLineEdit::disabled,
+QDoubleSpinBox::disabled,
+QCheckBox::disabled,
+QLabel::disabled,
+QGroupBox::disabled,
+QRadioButton::disabled,
+QComboBox::disabled
+{
+	color: rgb(176, 176, 176);
+}

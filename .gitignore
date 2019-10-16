@@ -1,0 +1,12 @@
+/bin/log
+/bin/RecvData
+/bin/*.dll
+/bin/*.qm
+/bin/*.exe
+/bin/platforms
+/bin/accessible
+/bin/bearer
+/bin/iconengines
+/bin/imageformats
+/debug
+/release

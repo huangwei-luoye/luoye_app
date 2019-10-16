@@ -1,0 +1,50 @@
+QWidget
+{
+	font: 14pt;
+	font: "微软雅黑";
+	color:#FFFFFF;
+}
+
+QPushButton
+{
+	min-height:38px;
+	min-width:120px;
+	max-height:38px;
+	max-width:120px;
+	border:1px solid rgb(33, 149, 243);
+	border-radius:5px;
+}
+
+QPushButton::hover
+{
+	background-color:#2196F3;
+}
+QPushButton::selected
+{
+	border:1px solid rgb(149, 158, 204);
+}
+QPushButton::disabled
+{
+	color: #434656;
+	border:1px solid rgb(67, 70, 86);
+}
+
+QTextEdit
+{
+	border-radius:5px;
+	border: 1px solid #2196F3;
+}
+
+QProgressBar 
+{
+	min-height:38px;
+	max-height:38px;
+    border:1px solid #2196F3;
+    border-radius: 5px;
+    text-align: center;
+}
+QProgressBar::chunk {
+    background-color: #2196F3;
+    width: 10px;
+    margin: 0.5px;
+}
