@@ -16,14 +16,6 @@ DESTDIR = $$PWD/bin
 CONFIG +=c++11
 RC_FILE = app.rc
 
-CONFIG(debug, debug|release){
-    TARGET = tds_projection_d
-}
-
-CONFIG(release, debug|release){
-    TARGET = tds_projection
-}
-
 SOURCES += main.cpp\
         mainwindow.cpp \
     UtilityClasses/CQssFileAdaption.cpp \
@@ -107,7 +99,9 @@ FORMS    += mainwindow.ui \
 
 win32: LIBS += -lws2_32 -lpsapi -luser32 -liphlpapi -luserenv
 
-win32: LIBS += -L$$PWD/bin/lib/ -luv
+
+
+win32: LIBS += -L$$PWD/bin/lib/ -llibuv
 
 INCLUDEPATH += $$PWD/bin
 DEPENDPATH += $$PWD/bin
