@@ -16,6 +16,14 @@ DESTDIR = $$PWD/bin
 CONFIG +=c++11
 RC_FILE = app.rc
 
+CONFIG(debug, debug|release){
+    TARGET = tds_projection_d
+}
+
+CONFIG(release, debug|release){
+    TARGET = tds_projection
+}
+
 SOURCES += main.cpp\
         mainwindow.cpp \
     UtilityClasses/CQssFileAdaption.cpp \
@@ -33,7 +41,15 @@ SOURCES += main.cpp\
     GUI/QcharWiget.cpp \
     UtilityClasses/CWaitObject.cpp \
     UtilityClasses/CWaitObjectManager.cpp \
-    ControlSercice/CWaveDataPraseThread.cpp
+    ControlSercice/CWaveDataPraseThread.cpp \
+    NetWork/Udp/Libuv/QEventDispatcherLibuv_p.cpp \
+    NetWork/Udp/Libuv/QEventDispatcherLibuvGui.cpp \
+    NetWork/Udp/Libuv/socknot_p.cpp \
+    NetWork/Udp/Libuv/timers_p.cpp \
+    NetWork/Udp/Libuv/win32_utils.cpp \
+    NetWork/Udp/Udp.cpp \
+    NetWork/Udp/UdpManager.cpp \
+    NetWork/Udp/UvUdpSocket.cpp
 
 HEADERS  += mainwindow.h \
     UtilityClasses/CQssFileAdaption.h \
@@ -54,11 +70,44 @@ HEADERS  += mainwindow.h \
     GUI/QcharWiget.h \
     UtilityClasses/CWaitObject.h \
     UtilityClasses/CWaitObjectManager.h \
-    ControlSercice/CWaveDataPraseThread.h
+    ControlSercice/CWaveDataPraseThread.h \
+    NetWork/Udp/Libuv/android-ifaddrs.h \
+    NetWork/Udp/Libuv/pthread-barrier.h \
+    NetWork/Udp/Libuv/QEventDispatcherLibuv.h \
+    NetWork/Udp/Libuv/QEventDispatcherLibuv_p.h \
+    NetWork/Udp/Libuv/QEventDispatcherLibuvGui.h \
+    NetWork/Udp/Libuv/qt4compat.h \
+    NetWork/Udp/Libuv/stdint-msvc2008.h \
+    NetWork/Udp/Libuv/tree.h \
+    NetWork/Udp/Libuv/uv-aix.h \
+    NetWork/Udp/Libuv/uv-bsd.h \
+    NetWork/Udp/Libuv/uv-darwin.h \
+    NetWork/Udp/Libuv/uv-errno.h \
+    NetWork/Udp/Libuv/uv-linux.h \
+    NetWork/Udp/Libuv/uv-os390.h \
+    NetWork/Udp/Libuv/uv-posix.h \
+    NetWork/Udp/Libuv/uv-sunos.h \
+    NetWork/Udp/Libuv/uv-threadpool.h \
+    NetWork/Udp/Libuv/uv-unix.h \
+    NetWork/Udp/Libuv/uv-version.h \
+    NetWork/Udp/Libuv/uv-win.h \
+    NetWork/Udp/Libuv/uv.h \
+    NetWork/Udp/Libuv/win32_utils.h \
+    NetWork/Udp/Network.h \
+    NetWork/Udp/Udp.h \
+    NetWork/Udp/Udp_global.h \
+    NetWork/Udp/UdpManager.h \
+    NetWork/Udp/UdpPrivate.h \
+    NetWork/Udp/UvUdpSocket.h
 
 FORMS    += mainwindow.ui \
     LogOpreate/LogOperateWidget.ui \
     GUI/CUdpCommunication.ui \
     GUI/QcharWiget.ui
 
-RESOURCES +=
+win32: LIBS += -lws2_32 -lpsapi -luser32 -liphlpapi -luserenv
+
+win32: LIBS += -L$$PWD/bin/lib/ -luv
+
+INCLUDEPATH += $$PWD/bin
+DEPENDPATH += $$PWD/bin
