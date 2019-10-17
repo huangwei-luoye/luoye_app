@@ -72,9 +72,8 @@ QChart *QcharWiget::CreateChart(LINE_TYPE type)
     return pchart;
 }
 
-void QcharWiget::OnShowWave(QList<QPointF> data)
+void QcharWiget::OnShowWave(const QList<QPointF> &data)
 {
-    //qDebug()<<"22-"<<this->thread()->currentThreadId();
     m_pSeries->replace(data);
 }
 

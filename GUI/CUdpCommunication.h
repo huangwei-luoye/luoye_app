@@ -39,6 +39,7 @@ private:
     RecvCollectDataThread m_RecvCollectThread;
 
     bool processAckProtocol(const QByteArray &data);
+    void SendCmdToTdsBoard(quint8 cmd);
     Q_SIGNAL void StartRecvSignal();
     Q_SIGNAL void StopRecvSignal();
     Q_SIGNAL void InitThreadSignal();

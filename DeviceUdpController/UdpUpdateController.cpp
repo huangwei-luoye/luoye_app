@@ -8,7 +8,7 @@
 UdpUpdateController::UdpUpdateController(QObject *parent) :
     QObject(parent)
 {
-//   m_currentPckNum = 0;
+    m_currentPkgIndex = 0;
 }
 
 UdpUpdateController::~UdpUpdateController()
@@ -20,7 +20,7 @@ void UdpUpdateController::RecvUdpData()
 {
     m_currentPkgIndex = 0;
     DeviceController *pDeviceCtr = DeviceController::getInstance();
-    connect(pDeviceCtr, SIGNAL(ProcessTdsUdpDataSignal(QByteArray)), this, SLOT(OnProcessRecvData(QByteArray)));
+    connect(pDeviceCtr, SIGNAL(ProcessTdsUdpDataSignal(QByteArray)), this, SLOT(OnProcessRecvData(QByteArray)), Qt::DirectConnection);
 }
 /**
  * @brief UdpUpdateController::OnProcessRecvData//按照协议解析接收到的数据
@@ -47,18 +47,23 @@ void UdpUpdateController::OnProcessRecvData(const QByteArray &udpData)
             LogOperate::getinstance()->LogOperaterUi(QString("数据头校验错误"),LOG_ERROR);
             return;
         }
+        //emit ResetTimerSignal();
+        if(m_currentPkgIndex != ProtocolHead.currentFramNum)
+        {
+            qDebug()<<"11 = "<<ProtocolHead.currentFramNum;
+            qDebug()<<"22 = "<<m_currentPkgIndex;
+        }
         m_currentPkgIndex++;
         if(ProtocolHead.allFrameCnt-1 >= ProtocolHead.currentFramNum)
         {
             m_point += QByteArray(udpData.data()+sizeof(MsgUdpDataAckProtocol),
                                    length-sizeof(MsgUdpDataAckProtocol)-sizeof(quint32)-sizeof(quint8));
-            //m_srcPoint += QByteArray(udpData.data(),length);
             emit UpdateProgressSignal(ProtocolHead.allFrameCnt, ProtocolHead.currentFramNum+1);
         }
         if(ProtocolHead.allFrameCnt-1 == ProtocolHead.currentFramNum)
         {
             isEnd = true;
-            //LogOperate::getinstance()->LogOperaterUi(QString(tr("采集数据接收完成")), LOG_INFO);
+            LogOperate::getinstance()->LogOperaterUi(QString(tr("采集数据接收完成")), LOG_INFO);
         }
 
         if((quint64)m_point.size() >= ProtocolHead.allPoint || isEnd)
@@ -80,12 +85,7 @@ void UdpUpdateController::OnProcessRecvData(const QByteArray &udpData)
             {
                 m_point.clear();
                 m_currentPkgIndex = 0;
-//                QFile file("./made.dat");
-//                if(file.open(QIODevice::WriteOnly))
-//                {
-//                    file.write(m_srcPoint);
-//                    file.flush();
-//                }
+
             }
         }
     }

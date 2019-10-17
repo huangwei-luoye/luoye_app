@@ -1,10 +1,17 @@
 #include "NetController.h"
 #include "QDebug"
 #include "UtilityClasses/CTools.h"
+#include <QDir>
+#include <QDateTime>
+
 NetController::NetController()
 {
     m_pTcpSocket = nullptr;
     m_pUdpSocket = nullptr;
+//    if(!QDir("./log/").exists())
+//    {
+//        QDir().mkpath("./log/");
+//    }
 
 }
 
@@ -26,6 +33,15 @@ bool NetController::OnOpenUdpNetwork(const QString &localIp, quint16 localPort)
 
     connect(m_pUdpSocket, SIGNAL(readyRead()), this, SLOT(OnProcessUdpReadData()));
     connect(m_pUdpSocket, SIGNAL(disconnected()), m_pUdpSocket, SLOT(deleteLater()));
+
+//    if(m_logFile.isOpen())
+//    {
+//        m_logFile.close();
+//    }
+
+//    QString fileName("./log/"+QDateTime::currentDateTime().toString("yyyy_MM_dd.hh_mm_ss") + ".dat");
+//    m_logFile.setFileName(fileName);
+//    m_logFile.open(QIODevice::WriteOnly | QIODevice::Text);
 
     return ret;
 
@@ -51,8 +67,18 @@ void NetController::OnProcessUdpReadData()
         udpData.resize(m_pUdpSocket->pendingDatagramSize());
         m_pUdpSocket->readDatagram(udpData.data(),udpData.size(), &host, &port);
 
-        //qDebug()<<"1111111 "<<QString(CTools::ByteArrayToString(udpData));
         emit UdpProcessReciveDataSignal(udpData);
+
+//        QString log = CTools::ByteArrayToString(udpData);
+//        if(!log.isEmpty())
+//        {
+//            if(m_logFile.isOpen())
+//            {
+//                m_logFile.write(QString(log+"\n").toStdString().c_str());
+//                m_logFile.flush();
+//            }
+//        }
+
     }
 
 }

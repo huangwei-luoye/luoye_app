@@ -2,6 +2,7 @@
 #define NETCONTROLLER_H
 #include <QTcpSocket>
 #include <QUdpSocket>
+#include <QFile>
 
 enum NetControlErr
 {
@@ -21,7 +22,9 @@ public:
     Q_SLOT bool OnOpenUdpNetwork(const QString &ip, quint16 port);
     Q_SLOT void OnCloseUdpNetWorke();
 
+
 private:
+    QFile m_logFile;
     QTcpSocket *m_pTcpSocket;
     QUdpSocket *m_pUdpSocket;
 

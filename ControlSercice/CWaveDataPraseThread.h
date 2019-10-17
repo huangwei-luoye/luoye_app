@@ -29,7 +29,7 @@ private:
     QList<QPointF> m_listPoint;
     QList<QPointF> m_sendPoint;
 
-    Q_SIGNAL void ShowWaveSignal(QList<QPointF> series);
+    Q_SIGNAL void ShowWaveSignal(const QList<QPointF> &series);
     Q_SLOT void OnSourceWave(const QByteArray &data);
     Q_SLOT void OnProcessData();
     Q_SLOT void OnCloseTimer();

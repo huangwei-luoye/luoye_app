@@ -18,11 +18,12 @@ public slots:
 private:
     QByteArray m_point;
 //    QByteArray m_srcPoint;
-    quint16 m_currentPkgIndex;
+    quint32 m_currentPkgIndex;
 
     Q_SLOT void OnProcessRecvData(const QByteArray &udpData);
     Q_SIGNAL void RecvCollectDataSignal(const QByteArray &data, bool isEnd, int loss);
     Q_SIGNAL void UpdateProgressSignal(quint32 maxSize, quint32 currentSize);
+    Q_SIGNAL void ResetTimerSignal();
 };
 
 #endif // UDPUPDATECONTROLLER_H

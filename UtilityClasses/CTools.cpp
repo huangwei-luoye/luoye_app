@@ -12,7 +12,7 @@ QString CTools::ByteArrayToString(const QByteArray &data)
 {
     QString str;
 
-    for(quint32 i = 0; i < data.size(); i++)
+    for(qint32 i = 0; i < data.size(); i++)
     {
         char buffer[8] = {0};
         sprintf(buffer, "%02X", (quint8)data.at(i));

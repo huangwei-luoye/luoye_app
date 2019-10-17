@@ -154,6 +154,22 @@ bool CUdpCommunication::processAckProtocol(const QByteArray &data)
      return false;
 }
 
+void CUdpCommunication::SendCmdToTdsBoard(quint8 cmd)
+{
+    DeviceController *pDeviceCtr = DeviceController::getInstance();
+    QString remoteIp = CSetting::getInstance()->getTdsBoardIp();
+    quint16 remotePort = CSetting::getInstance()->getTdsBoardPort();
+
+    QByteArray sendcmd;
+    MsgCmdUdp  msgCmd;
+
+    msgCmd.cmd = cmd;
+    sendcmd.append((const char*)&msgCmd, sizeof(MsgCmdUdp));
+
+    pDeviceCtr->SendUdpDataToTds(sendcmd, remoteIp, remotePort);
+
+}
+
 
 void CUdpCommunication::on_pushButton_start_clicked()
 {
@@ -162,6 +178,7 @@ void CUdpCommunication::on_pushButton_start_clicked()
     {
         ui->pushButton_start->setEnabled(false);
         ui->progressBar->setValue(0);
+        SendCmdToTdsBoard(CMD_START);
         emit ClosePaintSignal();
         emit InitThreadSignal();
         emit StartRecvSignal();

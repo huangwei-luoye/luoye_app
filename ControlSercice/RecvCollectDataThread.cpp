@@ -12,7 +12,7 @@ RecvCollectDataThread::RecvCollectDataThread(QObject *parent) :
     m_pTimer = new QTimer(this);
     m_pLoop = new QEventLoop(this);
 
-    m_pTimer->setInterval(1000*60);
+    m_pTimer->setInterval(1000*120);
     m_pTimer->setSingleShot(true);
 
     connect(m_pTimer, SIGNAL(timeout()), m_pLoop, SLOT(quit()));
@@ -35,7 +35,7 @@ RecvCollectDataThread::~RecvCollectDataThread()
         delete m_pUdpUpdateCtr;
         m_pUdpUpdateCtr = nullptr;
     }
-    qDebug()<<"xigou";
+    //qDebug()<<"xigou";
 }
 
 void RecvCollectDataThread::OnInitThread()
@@ -54,6 +54,7 @@ void RecvCollectDataThread::OnInitThread()
 
     connect(m_pUdpUpdateCtr, SIGNAL(UpdateProgressSignal(quint32, quint32)), this, SIGNAL(updateProgressSignal(quint32, quint32)));
     connect(m_pUdpUpdateCtr, SIGNAL(RecvCollectDataSignal(QByteArray,bool,int)), this, SLOT(OnRecvCollectData(QByteArray, bool, int)));
+    connect(m_pUdpUpdateCtr, SIGNAL(ResetTimerSignal()), this, SLOT(OnResetTimer()));
     connect(this, SIGNAL(OperatResultDataSignal(quint8, QByteArray , bool)), m_pFileOperate, SLOT(OnOperatResultData(quint8, QByteArray , bool)));
     connect(this, SIGNAL(WaveDataSignal(QByteArray)), pChar, SLOT(OnWaveData(QByteArray)));
     connect(m_pFileOperate, SIGNAL(OperatFinishSignal(quint8)), this, SLOT(OnOperatFinish(quint8)));
@@ -62,7 +63,7 @@ void RecvCollectDataThread::OnInitThread()
 
 void RecvCollectDataThread::OnStartRecv()
 {
-    qDebug()<<this->thread()->currentThreadId();
+
     m_isRunning = true;
     m_isEnd = false;
     m_pTimer->start();
@@ -95,6 +96,12 @@ void RecvCollectDataThread::OnStopRecv()
     m_pLoop->quit();
 }
 
+void RecvCollectDataThread::OnResetTimer()
+{
+    //qDebug()<<"00000000";
+    m_pTimer->start();
+}
+
 void RecvCollectDataThread::OnOperatFinish(quint8 channel)
 {
     m_isEnd = true;
@@ -123,7 +130,7 @@ void RecvCollectDataThread::OnRecvCollectData(const QByteArray &data, bool isEnd
 //                                                                 .arg(headInfo.publicHead.channel), LOG_WARNING);
         }
     }
-    m_pTimer->start();
+    //m_pTimer->start();
 
 }
 

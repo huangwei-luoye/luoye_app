@@ -40,7 +40,7 @@ private:
     QChart *CreateChart(LINE_TYPE type);
     CWaveDataPraseThread m_workThread;
 
-    Q_SLOT void OnShowWave(QList<QPointF> data);
+    Q_SLOT void OnShowWave(const QList<QPointF> &data);
     Q_SLOT void OnWaveData(const QByteArray &data);
     Q_SLOT void OnClosePaint();
     Q_SIGNAL void SourceWaveSignal(const QByteArray &srcData);

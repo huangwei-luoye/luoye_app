@@ -20,11 +20,6 @@ CWaveDataPraseThread::~CWaveDataPraseThread()
 {
     m_workThread.quit();
     m_workThread.wait();
-    if(m_pTimer)
-    {
-        delete m_pTimer;
-        m_pTimer = nullptr;
-    }
 }
 /**
  * @brief CWaveDataPraseThread::OnSourceWave解析处理数据

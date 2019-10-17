@@ -32,6 +32,7 @@ private:
 
     Q_SLOT void OnStartRecv();
     Q_SLOT void OnStopRecv();
+    Q_SLOT void OnResetTimer();
     Q_SLOT void OnOperatFinish(quint8 channel);
     Q_SLOT void OnRecvCollectData(const QByteArray &data, bool isEnd, int loss);
     Q_SIGNAL void OperatResultDataSignal(quint8 channel, const QByteArray &data, bool isEnd);
@@ -39,6 +40,7 @@ private:
     Q_SIGNAL void updateProgressSignal(quint32 maxSize, quint32 currentSize);
     Q_SIGNAL void CollectDataFinishSignal(bool isSuccesse);
     Q_SIGNAL void OpreatCloseFileSignal();
+
 };
 
 #endif // RECVCOLLECTDATATHREAD_H
