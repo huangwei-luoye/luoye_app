@@ -26,7 +26,7 @@ MainWindow::MainWindow(QWidget *parent) :
         QMessageBox::warning(this,tr("警告"),tr("加载配置文件失败"));
         LogOperate::getinstance()->LogOperaterUi("初始化配置文件config.xml失败");
     }
-    QTimer::singleShot(500, this, SLOT(initNetwork()));
+    QTimer::singleShot(1000, this, SLOT(initNetwork()));
     initUI();
 }
 
@@ -65,8 +65,8 @@ void MainWindow::initNetwork()
 {
     DeviceController *pDeviceContrl = DeviceController::getInstance();
 
-    //LogOperate::getinstance()->LogOperaterUi(tr("正在初始化UDP网络中...."));
-    //CTools::Delay(500);
+    LogOperate::getinstance()->LogOperaterUi(tr("正在初始化UDP网络中...."));
+    CTools::Delay(5000);
     bool ret = pDeviceContrl->OpenTdsBoardUdp(CSetting::getInstance()->getLocalIp(),CSetting::getInstance()->getLocalPort());
     ret ? LogOperate::getinstance()->LogOperaterUi("初始化TDS板UDP网络成功") : LogOperate::getinstance()->LogOperaterUi("初始化UDP网络失败!",LOG_ERROR);
 }

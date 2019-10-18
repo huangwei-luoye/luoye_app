@@ -36,7 +36,7 @@ private:
     Q_SLOT void OnOperatFinish(quint8 channel);
     Q_SLOT void OnRecvCollectData(const QByteArray &data, bool isEnd, int loss);
     Q_SIGNAL void OperatResultDataSignal(quint8 channel, const QByteArray &data, bool isEnd);
-    Q_SIGNAL void WaveDataSignal(const QByteArray &data);
+    Q_SIGNAL void WaveDataSignal(const QByteArray &data, bool isEnd);
     Q_SIGNAL void updateProgressSignal(quint32 maxSize, quint32 currentSize);
     Q_SIGNAL void CollectDataFinishSignal(bool isSuccesse);
     Q_SIGNAL void OpreatCloseFileSignal();

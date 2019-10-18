@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created by: Qt User Interface Compiler version 5.12.1
+** Created by: Qt User Interface Compiler version 5.8.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,7 +10,10 @@
 #define UI_MAINWINDOW_H
 
 #include <QtCore/QVariant>
+#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
@@ -30,25 +33,25 @@ public:
     void setupUi(QMainWindow *MainWindow)
     {
         if (MainWindow->objectName().isEmpty())
-            MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
+            MainWindow->setObjectName(QStringLiteral("MainWindow"));
         MainWindow->resize(958, 663);
         centralWidget = new QWidget(MainWindow);
-        centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
+        centralWidget->setObjectName(QStringLiteral("centralWidget"));
         verticalLayout = new QVBoxLayout(centralWidget);
         verticalLayout->setSpacing(6);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         verticalLayout_2 = new QVBoxLayout();
         verticalLayout_2->setSpacing(6);
-        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
+        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
         widget_udpCommunication = new QWidget(centralWidget);
-        widget_udpCommunication->setObjectName(QString::fromUtf8("widget_udpCommunication"));
+        widget_udpCommunication->setObjectName(QStringLiteral("widget_udpCommunication"));
         widget_udpCommunication->setEnabled(true);
 
         verticalLayout_2->addWidget(widget_udpCommunication);
 
         widget_waveShow = new QWidget(centralWidget);
-        widget_waveShow->setObjectName(QString::fromUtf8("widget_waveShow"));
+        widget_waveShow->setObjectName(QStringLiteral("widget_waveShow"));
 
         verticalLayout_2->addWidget(widget_waveShow);
 
@@ -58,7 +61,7 @@ public:
         verticalLayout->addLayout(verticalLayout_2);
 
         widget_log = new QWidget(centralWidget);
-        widget_log->setObjectName(QString::fromUtf8("widget_log"));
+        widget_log->setObjectName(QStringLiteral("widget_log"));
         widget_log->setMinimumSize(QSize(0, 0));
 
         verticalLayout->addWidget(widget_log);
@@ -74,7 +77,7 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "\344\270\215\347\237\245\351\201\223\345\217\226\345\225\245\345\220\215", nullptr));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "\344\270\215\347\237\245\351\201\223\345\217\226\345\225\245\345\220\215", Q_NULLPTR));
     } // retranslateUi
 
 };

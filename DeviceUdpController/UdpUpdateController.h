@@ -17,6 +17,7 @@ public slots:
 
 private:
     QByteArray m_point;
+    quint32 m_pointMax;
 //    QByteArray m_srcPoint;
     quint32 m_currentPkgIndex;
 

@@ -20,7 +20,7 @@ QcharWiget::QcharWiget(QWidget *parent) :
     pchartView->setRenderHint(QPainter::Antialiasing);
     ui->gridLayout->addWidget(pchartView);
 
-    connect(this, SIGNAL(SourceWaveSignal(QByteArray)), &m_workThread, SLOT(OnSourceWave(QByteArray)));
+    connect(this, SIGNAL(SourceWaveSignal(QByteArray,bool)), &m_workThread, SLOT(OnSourceWave(QByteArray, bool)));
     connect(&m_workThread, SIGNAL(ShowWaveSignal(QList<QPointF>)), this, SLOT(OnShowWave(QList<QPointF>)));
     connect(this, SIGNAL(CloseTimerSignal()), &m_workThread, SLOT(OnCloseTimer()));
 }
@@ -77,9 +77,9 @@ void QcharWiget::OnShowWave(const QList<QPointF> &data)
     m_pSeries->replace(data);
 }
 
-void QcharWiget::OnWaveData(const QByteArray &data)
+void QcharWiget::OnWaveData(const QByteArray &data, bool isEnd)
 {
-    emit SourceWaveSignal(data);
+    emit SourceWaveSignal(data,isEnd);
 }
 
 void QcharWiget::OnClosePaint()

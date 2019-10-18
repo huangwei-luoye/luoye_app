@@ -41,9 +41,9 @@ private:
     CWaveDataPraseThread m_workThread;
 
     Q_SLOT void OnShowWave(const QList<QPointF> &data);
-    Q_SLOT void OnWaveData(const QByteArray &data);
+    Q_SLOT void OnWaveData(const QByteArray &data, bool isEnd);
     Q_SLOT void OnClosePaint();
-    Q_SIGNAL void SourceWaveSignal(const QByteArray &srcData);
+    Q_SIGNAL void SourceWaveSignal(const QByteArray &srcData,bool isEnd);
     Q_SIGNAL void CloseTimerSignal();
 
 };

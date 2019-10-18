@@ -56,7 +56,7 @@ void RecvCollectDataThread::OnInitThread()
     connect(m_pUdpUpdateCtr, SIGNAL(RecvCollectDataSignal(QByteArray,bool,int)), this, SLOT(OnRecvCollectData(QByteArray, bool, int)));
     connect(m_pUdpUpdateCtr, SIGNAL(ResetTimerSignal()), this, SLOT(OnResetTimer()));
     connect(this, SIGNAL(OperatResultDataSignal(quint8, QByteArray , bool)), m_pFileOperate, SLOT(OnOperatResultData(quint8, QByteArray , bool)));
-    connect(this, SIGNAL(WaveDataSignal(QByteArray)), pChar, SLOT(OnWaveData(QByteArray)));
+    connect(this, SIGNAL(WaveDataSignal(QByteArray, bool)), pChar, SLOT(OnWaveData(QByteArray,bool)));
     connect(m_pFileOperate, SIGNAL(OperatFinishSignal(quint8)), this, SLOT(OnOperatFinish(quint8)));
     LogOperate::getinstance()->LogOperaterUi(QString("正在接收回波数据中！"), LOG_INFO);
 }
@@ -77,7 +77,7 @@ void RecvCollectDataThread::OnStartRecv()
             emit CollectDataFinishSignal(false);
         }
     }
-    qDebug()<<"22222222";
+
 }
 
 void RecvCollectDataThread::OnStopRecv()
@@ -98,7 +98,6 @@ void RecvCollectDataThread::OnStopRecv()
 
 void RecvCollectDataThread::OnResetTimer()
 {
-    //qDebug()<<"00000000";
     m_pTimer->start();
 }
 
@@ -116,7 +115,7 @@ void RecvCollectDataThread::OnRecvCollectData(const QByteArray &data, bool isEnd
         return;
     }
     emit OperatResultDataSignal(1, data ,isEnd);
-    emit WaveDataSignal(data);
+    emit WaveDataSignal(data, isEnd);
     if(isEnd)
     {
         LogOperate::getinstance()->LogOperaterUi(QString("微波采集波形接收100%！"),LOG_INFO);
@@ -130,7 +129,7 @@ void RecvCollectDataThread::OnRecvCollectData(const QByteArray &data, bool isEnd
 //                                                                 .arg(headInfo.publicHead.channel), LOG_WARNING);
         }
     }
-    //m_pTimer->start();
+    m_pTimer->start();
 
 }
 

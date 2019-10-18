@@ -5,10 +5,13 @@
 #include <QtEndian>
 #include <QDebug>
 
+#define MAX_POINT (1024*1)
+
 UdpUpdateController::UdpUpdateController(QObject *parent) :
     QObject(parent)
 {
     m_currentPkgIndex = 0;
+    m_pointMax = MAX_POINT;
 }
 
 UdpUpdateController::~UdpUpdateController()
@@ -47,18 +50,13 @@ void UdpUpdateController::OnProcessRecvData(const QByteArray &udpData)
             LogOperate::getinstance()->LogOperaterUi(QString("数据头校验错误"),LOG_ERROR);
             return;
         }
-        //emit ResetTimerSignal();
-        if(m_currentPkgIndex != ProtocolHead.currentFramNum)
-        {
-            qDebug()<<"11 = "<<ProtocolHead.currentFramNum;
-            qDebug()<<"22 = "<<m_currentPkgIndex;
-        }
         m_currentPkgIndex++;
         if(ProtocolHead.allFrameCnt-1 >= ProtocolHead.currentFramNum)
         {
-            m_point += QByteArray(udpData.data()+sizeof(MsgUdpDataAckProtocol),
-                                   length-sizeof(MsgUdpDataAckProtocol)-sizeof(quint32)-sizeof(quint8));
+            //m_point += QByteArray(udpData.data()+sizeof(MsgUdpDataAckProtocol),length-sizeof(MsgUdpDataAckProtocol)-sizeof(quint32)-sizeof(quint8));
+
             emit UpdateProgressSignal(ProtocolHead.allFrameCnt, ProtocolHead.currentFramNum+1);
+
         }
         if(ProtocolHead.allFrameCnt-1 == ProtocolHead.currentFramNum)
         {
@@ -72,13 +70,13 @@ void UdpUpdateController::OnProcessRecvData(const QByteArray &udpData)
             if((quint64)m_point.size() > ProtocolHead.allPoint)
             {
 
-                emit RecvCollectDataSignal(m_point, isEnd, ProtocolHead.allFrameCnt-m_currentPkgIndex);
+                //emit RecvCollectDataSignal(m_point, isEnd, ProtocolHead.allFrameCnt-m_currentPkgIndex);
                 QByteArray pointData = QByteArray(m_point.data()+ProtocolHead.allPoint, m_point.size()-ProtocolHead.allPoint);
                 m_point = pointData;
             }
             else
             {
-                emit RecvCollectDataSignal(m_point,isEnd, ProtocolHead.allFrameCnt-m_currentPkgIndex);
+                //emit RecvCollectDataSignal(m_point,isEnd, ProtocolHead.allFrameCnt-m_currentPkgIndex);
                 m_point.clear();
             }
             if(isEnd)

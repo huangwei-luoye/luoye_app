@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'LogOperateWidget.ui'
 **
-** Created by: Qt User Interface Compiler version 5.12.1
+** Created by: Qt User Interface Compiler version 5.8.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,8 +10,9 @@
 #define UI_LOGOPERATEWIDGET_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QIcon>
+#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
@@ -39,14 +40,14 @@ public:
     void setupUi(QWidget *LogOperateWidget)
     {
         if (LogOperateWidget->objectName().isEmpty())
-            LogOperateWidget->setObjectName(QString::fromUtf8("LogOperateWidget"));
+            LogOperateWidget->setObjectName(QStringLiteral("LogOperateWidget"));
         LogOperateWidget->resize(624, 288);
         verticalLayout = new QVBoxLayout(LogOperateWidget);
         verticalLayout->setSpacing(0);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         verticalLayout->setContentsMargins(0, 0, 0, 0);
         widget = new QWidget(LogOperateWidget);
-        widget->setObjectName(QString::fromUtf8("widget"));
+        widget->setObjectName(QStringLiteral("widget"));
         QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -69,16 +70,16 @@ public:
         widget->setAutoFillBackground(true);
         horizontalLayout = new QHBoxLayout(widget);
         horizontalLayout->setSpacing(0);
-        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         horizontalLayout->setContentsMargins(10, 0, 10, 0);
         label_icon = new QLabel(widget);
-        label_icon->setObjectName(QString::fromUtf8("label_icon"));
+        label_icon->setObjectName(QStringLiteral("label_icon"));
 
         horizontalLayout->addWidget(label_icon);
 
         label_title = new QLabel(widget);
-        label_title->setObjectName(QString::fromUtf8("label_title"));
-        label_title->setStyleSheet(QString::fromUtf8("border-image:url();\n"
+        label_title->setObjectName(QStringLiteral("label_title"));
+        label_title->setStyleSheet(QLatin1String("border-image:url();\n"
 "background-color: rgb();"));
 
         horizontalLayout->addWidget(label_title);
@@ -88,17 +89,17 @@ public:
         horizontalLayout->addItem(horizontalSpacer);
 
         toolButton_clearAll = new QToolButton(widget);
-        toolButton_clearAll->setObjectName(QString::fromUtf8("toolButton_clearAll"));
+        toolButton_clearAll->setObjectName(QStringLiteral("toolButton_clearAll"));
         QSizePolicy sizePolicy1(QSizePolicy::Preferred, QSizePolicy::Preferred);
         sizePolicy1.setHorizontalStretch(0);
         sizePolicy1.setVerticalStretch(0);
         sizePolicy1.setHeightForWidth(toolButton_clearAll->sizePolicy().hasHeightForWidth());
         toolButton_clearAll->setSizePolicy(sizePolicy1);
         toolButton_clearAll->setMinimumSize(QSize(60, 25));
-        toolButton_clearAll->setStyleSheet(QString::fromUtf8("border-image:url();\n"
+        toolButton_clearAll->setStyleSheet(QLatin1String("border-image:url();\n"
 "background-color: rgb();"));
         QIcon icon;
-        icon.addFile(QString::fromUtf8(":/bin/res/imgs/img_main/clear.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon.addFile(QStringLiteral(":/bin/res/imgs/img_main/clear.png"), QSize(), QIcon::Normal, QIcon::Off);
         toolButton_clearAll->setIcon(icon);
         toolButton_clearAll->setIconSize(QSize(20, 20));
         toolButton_clearAll->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
@@ -107,12 +108,12 @@ public:
         horizontalLayout->addWidget(toolButton_clearAll);
 
         toolButton_delete = new QToolButton(widget);
-        toolButton_delete->setObjectName(QString::fromUtf8("toolButton_delete"));
+        toolButton_delete->setObjectName(QStringLiteral("toolButton_delete"));
         toolButton_delete->setMinimumSize(QSize(60, 25));
-        toolButton_delete->setStyleSheet(QString::fromUtf8("border-image:url();\n"
+        toolButton_delete->setStyleSheet(QLatin1String("border-image:url();\n"
 "background-color: rgb();"));
         QIcon icon1;
-        icon1.addFile(QString::fromUtf8(":/bin/res/imgs/img_main/close.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon1.addFile(QStringLiteral(":/bin/res/imgs/img_main/close.png"), QSize(), QIcon::Normal, QIcon::Off);
         toolButton_delete->setIcon(icon1);
         toolButton_delete->setIconSize(QSize(20, 20));
         toolButton_delete->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
@@ -124,7 +125,7 @@ public:
         verticalLayout->addWidget(widget);
 
         tableView = new QTableView(LogOperateWidget);
-        tableView->setObjectName(QString::fromUtf8("tableView"));
+        tableView->setObjectName(QStringLiteral("tableView"));
 
         verticalLayout->addWidget(tableView);
 
@@ -136,11 +137,11 @@ public:
 
     void retranslateUi(QWidget *LogOperateWidget)
     {
-        LogOperateWidget->setWindowTitle(QApplication::translate("LogOperateWidget", "LogOperateWidget", nullptr));
+        LogOperateWidget->setWindowTitle(QApplication::translate("LogOperateWidget", "LogOperateWidget", Q_NULLPTR));
         label_icon->setText(QString());
-        label_title->setText(QApplication::translate("LogOperateWidget", "  \347\263\273\347\273\237\346\227\245\345\277\227  ", nullptr));
-        toolButton_clearAll->setText(QApplication::translate("LogOperateWidget", "\346\270\205\347\251\272", nullptr));
-        toolButton_delete->setText(QApplication::translate("LogOperateWidget", "\345\210\240\351\231\244", nullptr));
+        label_title->setText(QApplication::translate("LogOperateWidget", "  \347\263\273\347\273\237\346\227\245\345\277\227  ", Q_NULLPTR));
+        toolButton_clearAll->setText(QApplication::translate("LogOperateWidget", "\346\270\205\347\251\272", Q_NULLPTR));
+        toolButton_delete->setText(QApplication::translate("LogOperateWidget", "\345\210\240\351\231\244", Q_NULLPTR));
     } // retranslateUi
 
 };

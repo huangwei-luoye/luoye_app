@@ -68,7 +68,7 @@ void NetController::OnProcessUdpReadData()
         m_pUdpSocket->readDatagram(udpData.data(),udpData.size(), &host, &port);
 
         emit UdpProcessReciveDataSignal(udpData);
-
+        //qDebug()<<CTools::ByteArrayToString(udpData);
 //        QString log = CTools::ByteArrayToString(udpData);
 //        if(!log.isEmpty())
 //        {

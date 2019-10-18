@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'QcharWiget.ui'
 **
-** Created by: Qt User Interface Compiler version 5.12.1
+** Created by: Qt User Interface Compiler version 5.8.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,9 +10,12 @@
 #define UI_QCHARWIGET_H
 
 #include <QtCore/QVariant>
+#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -26,14 +29,14 @@ public:
     void setupUi(QWidget *QcharWiget)
     {
         if (QcharWiget->objectName().isEmpty())
-            QcharWiget->setObjectName(QString::fromUtf8("QcharWiget"));
+            QcharWiget->setObjectName(QStringLiteral("QcharWiget"));
         QcharWiget->resize(482, 300);
         horizontalLayout_2 = new QHBoxLayout(QcharWiget);
         horizontalLayout_2->setSpacing(0);
-        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
         horizontalLayout_2->setContentsMargins(0, 0, 0, 0);
         gridLayout = new QGridLayout();
-        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
+        gridLayout->setObjectName(QStringLiteral("gridLayout"));
 
         horizontalLayout_2->addLayout(gridLayout);
 
@@ -45,7 +48,7 @@ public:
 
     void retranslateUi(QWidget *QcharWiget)
     {
-        QcharWiget->setWindowTitle(QApplication::translate("QcharWiget", "Form", nullptr));
+        QcharWiget->setWindowTitle(QApplication::translate("QcharWiget", "Form", Q_NULLPTR));
     } // retranslateUi
 
 };
