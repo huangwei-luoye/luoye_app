@@ -25,7 +25,6 @@ INPUT(
 ./release\Udp.o
 ./release\UdpManager.o
 ./release\UvUdpSocket.o
-./release\QEventDispatcherLibuv.o
 ./release\moc_mainwindow.o
 ./release\moc_LogOperate.o
 ./release\moc_LogOperateTableMode.o

@@ -1,5 +1,5 @@
 #include <qplatformdefs.h>
-#include <QtGui/5.12.1/QtGui/qpa/qwindowsysteminterface.h>
+#include <QtGui/5.8.0/QtGui/qpa/qwindowsysteminterface.h>
 #include <QtGui/QGuiApplication>
 #include "QEventDispatcherLibuvGui.h"
 

@@ -2,6 +2,7 @@
 #include <time.h>
 #include "win32_utils.h"
 #include <sysinfoapi.h>
+#include <windef.h>
 #include <timezoneapi.h>
 
 #define DELTA_EPOCH_IN_MICROSECS Q_UINT64_C(11644473600000000)

@@ -7,13 +7,28 @@
 QT       += core gui network xml
 QT       += charts
 
+win32: LIBS += -L$$PWD/bin/lib/ -luv
+win32: LIBS += -lws2_32 -lpsapi -luser32 -liphlpapi -luserenv
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = tds_projection
+
 TEMPLATE = app
 
 DESTDIR = $$PWD/bin
-CONFIG +=c++11
+
+DEFINES += QT_DEPRECATED_WARNINGS
+
+CONFIG += c++11
+
+CONFIG(debug, debug|release){
+    TARGET = tds_projection_d
+}
+
+CONFIG(release, debug|release){
+    TARGET = tds_projection
+}
 RC_FILE = app.rc
 
 SOURCES += main.cpp\
@@ -41,7 +56,8 @@ SOURCES += main.cpp\
     NetWork/Udp/Libuv/win32_utils.cpp \
     NetWork/Udp/Udp.cpp \
     NetWork/Udp/UdpManager.cpp \
-    NetWork/Udp/UvUdpSocket.cpp
+    NetWork/Udp/UvUdpSocket.cpp \
+    NetWork/Udp/Libuv/QEventDispatcherLibuv.cpp
 
 HEADERS  += mainwindow.h \
     UtilityClasses/CQssFileAdaption.h \
@@ -96,12 +112,6 @@ FORMS    += mainwindow.ui \
     LogOpreate/LogOperateWidget.ui \
     GUI/CUdpCommunication.ui \
     GUI/QcharWiget.ui
-
-win32: LIBS += -lws2_32 -lpsapi -luser32 -liphlpapi -luserenv
-
-
-
-win32: LIBS += -L$$PWD/bin/lib/ -llibuv
 
 INCLUDEPATH += $$PWD/bin
 DEPENDPATH += $$PWD/bin
