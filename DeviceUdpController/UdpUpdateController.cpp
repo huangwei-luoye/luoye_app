@@ -54,30 +54,28 @@ void UdpUpdateController::OnProcessRecvData(const QByteArray &udpData)
         if(ProtocolHead.allFrameCnt-1 >= ProtocolHead.currentFramNum)
         {
             m_point += QByteArray(udpData.data()+sizeof(MsgUdpDataAckProtocol),length-sizeof(MsgUdpDataAckProtocol)-sizeof(quint32)-sizeof(quint8));
-
             emit UpdateProgressSignal(ProtocolHead.allFrameCnt, ProtocolHead.currentFramNum+1);
-
         }
         if(ProtocolHead.allFrameCnt-1 == ProtocolHead.currentFramNum)
         {
             isEnd = true;
             LogOperate::getinstance()->LogOperaterUi(QString(tr("采集数据接收完成")), LOG_INFO);
         }
-
-        if((quint64)m_point.size() >= ProtocolHead.allPoint || isEnd)
+        if((quint64)m_point.size() >= m_pointMax || isEnd)
         {
 
-            if((quint64)m_point.size() > ProtocolHead.allPoint)
+            if((quint64)m_point.size() > m_pointMax)
             {
-
-                emit RecvCollectDataSignal(m_point, isEnd, ProtocolHead.allFrameCnt-m_currentPkgIndex);
-                QByteArray pointData = QByteArray(m_point.data()+ProtocolHead.allPoint, m_point.size()-ProtocolHead.allPoint);
+                //qDebug()<<"5555555";
+                //emit RecvCollectDataSignal(m_point, isEnd, ProtocolHead.allFrameCnt-m_currentPkgIndex);
+                QByteArray pointData = QByteArray(m_point.data()+m_pointMax, m_point.size()-m_pointMax);
                 m_point = pointData;
             }
             else
             {
                 emit RecvCollectDataSignal(m_point,isEnd, ProtocolHead.allFrameCnt-m_currentPkgIndex);
                 m_point.clear();
+                //qDebug()<<"5555555";
             }
             if(isEnd)
             {

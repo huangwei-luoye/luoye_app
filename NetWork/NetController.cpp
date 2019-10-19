@@ -31,6 +31,7 @@ bool NetController::OnOpenUdpNetwork(const QString &localIp, quint16 localPort)
     hostAddr.setAddress(localIp);
     bool ret = m_pUdpSocket->bind(hostAddr,localPort,QUdpSocket::ShareAddress | QUdpSocket::ReuseAddressHint);
 
+
     connect(m_pUdpSocket, SIGNAL(readyRead()), this, SLOT(OnProcessUdpReadData()));
     connect(m_pUdpSocket, SIGNAL(disconnected()), m_pUdpSocket, SLOT(deleteLater()));
 

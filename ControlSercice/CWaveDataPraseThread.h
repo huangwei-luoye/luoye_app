@@ -27,7 +27,6 @@ private:
     QTimer *m_pTimer;
     QThread m_workThread;
     QList<QPointF> m_listPoint;
-    QByteArray m_arraySrcData;
     QList<QPointF> m_sendPoint;
 
     Q_SIGNAL void ShowWaveSignal(const QList<QPointF> &series);

@@ -31,6 +31,7 @@ QPushButton::disabled
 
 QTextEdit
 {
+	max-height:120;
 	border-radius:5px;
 	border: 1px solid #2196F3;
 }

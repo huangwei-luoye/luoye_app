@@ -28,7 +28,6 @@ QcharWiget::QcharWiget(QWidget *parent) :
 QcharWiget::~QcharWiget()
 {
     delete ui;
-    qDebug()<<"xigou 5";
 }
 
 QcharWiget *QcharWiget::getInstance()
@@ -46,17 +45,19 @@ QChart *QcharWiget::CreateChart(LINE_TYPE type)
         case TYPE_SPLINE:
         {
             pchart = new QChart();
-            pchart->setTitle(tr("实时采集波形"));
+            pchart->setTitle(tr("采集波形"));
             pchart->legend()->hide();
             pchart->setTheme(QChart::ChartThemeBlueCerulean);//设置系统主题
             QValueAxis *asisX = new QValueAxis();
             QValueAxis *asisY = new QValueAxis();
-            asisX->setRange(0, 500);
+            //asisX->setGridLineVisible(false);
+            //asisY->setGridLineVisible(false);
+            asisX->setRange(0, 1000);
             asisY->setRange(-32767,32768);
-            asisX->setTickCount(5+1);
+            asisX->setTickCount(10+1);
             asisY->setTickCount(5+1);
-            asisX->setTitleText("time");
-            asisY->setTitleText("temp");
+            //asisX->setTitleText("current point");
+            //asisY->setTitleText("A");
             asisX->setLabelFormat("%d");
             asisY->setLabelFormat("%.1f");
 

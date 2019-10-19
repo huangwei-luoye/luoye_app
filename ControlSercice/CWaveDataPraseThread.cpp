@@ -2,6 +2,7 @@
 #include "UtilityClasses/CTools.h"
 #include <QMetaType>
 #include <QDebug>
+#define LIST_MAXSIZE (1024*1024*5)
 
 CWaveDataPraseThread::CWaveDataPraseThread(QObject *parent) : QObject(parent)
 {
@@ -9,19 +10,17 @@ CWaveDataPraseThread::CWaveDataPraseThread(QObject *parent) : QObject(parent)
 
     m_pTimer = new QTimer(this);
     m_pTimer->setInterval(10);
-    m_maxSize = 500;
+    m_maxSize = 1000;
     m_index = 0;
     connect(m_pTimer, SIGNAL(timeout()), this, SLOT(OnProcessData()));
     this->moveToThread(&m_workThread);
     m_workThread.start();
-    qDebug()<<"gouzao1";
 }
 
 CWaveDataPraseThread::~CWaveDataPraseThread()
 {
     m_workThread.quit();
     m_workThread.wait();
-    qDebug()<<"xigou2";
 }
 /**
  * @brief CWaveDataPraseThread::OnSourceWave解析处理数据
@@ -29,14 +28,14 @@ CWaveDataPraseThread::~CWaveDataPraseThread()
  */
 void CWaveDataPraseThread::OnSourceWave(const QByteArray &data, bool isEnd)
 {
-    m_arraySrcData += QByteArray(data.data(), data.size());
 
+    if(m_listPoint.size() < LIST_MAXSIZE)
+    {
+        m_listPoint += CTools::BumaTosrcma(data);
+    }
     if(isEnd)
     {
-        m_listPoint = CTools::BumaTosrcma(m_arraySrcData);
         m_pTimer->start();
-        qDebug()<<"timer start";
-        //m_arraySrcData.clear();
     }
 }
 
@@ -64,5 +63,6 @@ void CWaveDataPraseThread::OnProcessData()
 void CWaveDataPraseThread::OnCloseTimer()
 {
     m_pTimer->stop();
+    m_listPoint.clear();
     m_index = 0;
 }

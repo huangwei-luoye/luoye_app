@@ -12,7 +12,7 @@ RecvCollectDataThread::RecvCollectDataThread(QObject *parent) :
     m_pTimer = new QTimer(this);
     m_pLoop = new QEventLoop(this);
 
-    m_pTimer->setInterval(1000*120);
+    m_pTimer->setInterval(1000*20);
     m_pTimer->setSingleShot(true);
 
     connect(m_pTimer, SIGNAL(timeout()), m_pLoop, SLOT(quit()));
@@ -36,7 +36,6 @@ RecvCollectDataThread::~RecvCollectDataThread()
         delete m_pUdpUpdateCtr;
         m_pUdpUpdateCtr = nullptr;
     }
-    qDebug()<<"xigou1";
 }
 
 void RecvCollectDataThread::OnInitThread()

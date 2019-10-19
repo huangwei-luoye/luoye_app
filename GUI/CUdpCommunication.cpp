@@ -26,7 +26,7 @@ CUdpCommunication::CUdpCommunication(QWidget *parent) :
     pVBoxLayout->setMargin(0);
     ui->widget_wave->setLayout(pVBoxLayout);
 
-
+    ui->pushButton_connect->setEnabled(false);
     connect(this, SIGNAL(InitThreadSignal()), &m_RecvCollectThread, SLOT(OnInitThread()),Qt::QueuedConnection);
     connect(this, SIGNAL(StartRecvSignal()), &m_RecvCollectThread, SLOT(OnStartRecv()));
     connect(this, SIGNAL(StopRecvSignal()), &m_RecvCollectThread, SLOT(OnStopRecv()));
@@ -124,6 +124,11 @@ void CUdpCommunication::OnCollectDataFinish(bool isSuccess)
     ui->pushButton_start->setEnabled(true);
 }
 
+void CUdpCommunication::OnEnablePushButton()
+{
+    ui->pushButton_connect->setEnabled(true);
+}
+
 void CUdpCommunication::on_pushButton_clearAll_clicked()
 {
     ui->textEdit_udpData->clear();
@@ -201,6 +206,7 @@ void CUdpCommunication::on_pushButton_stop_clicked()
     ui->pushButton_stop->setEnabled(false);
     emit StopRecvSignal();
     ui->pushButton_stop->setEnabled(true);
+    ui->pushButton_start->setEnabled(true);
 }
 
 bool CUdpCommunication::CheckIsConnect()

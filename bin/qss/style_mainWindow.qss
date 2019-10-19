@@ -5,6 +5,72 @@ QWidget
 	color:#FFFFFF;
 }
 
+QWidget#widget_title
+{
+	height:30px;
+	background-color:#2F3242;
+}
+QLabel#label_version
+{
+	font: 14pt;
+	background-color:#2F3242;
+	max-height:20px;
+	min-width:100px;
+}
+
+QLabel#label_logo
+{
+	
+	border-image: url(./images/image/tdslogofeiji.png);
+	background-color:#2F3242;
+	max-height:32px;
+	min-width:32px;
+}
+
+QPushButton#pushButton_close
+{
+	min-height:30px;
+	min-width:30px;
+	max-height:30px;
+	max-width:30px;
+	border:0px solid rgb(33, 149, 243);
+	border-radius:5px;
+	background-color:#2F3242;
+	image: url(./images/image/top_icon_off_n.png);
+}
+QPushButton#pushButton_close::hover
+{
+	background-color:#2196F3;
+	image: url(./images/image/top_icon_off_h.png);
+}
+QPushButton#pushButton_close::selected
+{
+	border:1px solid rgb(149, 158, 204);
+	image: url(./images/image/top_icon_off_p.png);
+}
+QPushButton#pushButton_min
+{
+	min-height:30px;
+	min-width:30px;
+	max-height:30px;
+	max-width:30px;
+	border:0px solid rgb(33, 149, 243);
+	border-radius:5px;
+	background-color:#2F3242;
+	image: url(./images/image/top_icon_small_n.png);
+}
+
+QPushButton#pushButton_min::hover
+{
+	background-color:#2196F3;
+	image: url(./images/image/top_icon_small_h.png);
+}
+QPushButton#pushButton_min::selected
+{
+	border:1px solid rgb(149, 158, 204);
+	image: url(./images/image/top_icon_small_p.png);
+}
+
 QLabel#label_Version
 {
 	font: 16pt;
