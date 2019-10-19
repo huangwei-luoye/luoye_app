@@ -43,18 +43,21 @@ public:
     QPushButton *pushButton_send;
     QPushButton *pushButton_connect;
     QProgressBar *progressBar;
+    QWidget *widget_wave;
 
     void setupUi(QWidget *CUdpCommunication)
     {
         if (CUdpCommunication->objectName().isEmpty())
             CUdpCommunication->setObjectName(QStringLiteral("CUdpCommunication"));
-        CUdpCommunication->resize(558, 348);
+        CUdpCommunication->resize(592, 402);
         QFont font;
         font.setFamily(QString::fromUtf8("\345\276\256\350\275\257\351\233\205\351\273\221"));
         font.setPointSize(12);
         CUdpCommunication->setFont(font);
         horizontalLayout = new QHBoxLayout(CUdpCommunication);
+        horizontalLayout->setSpacing(0);
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        horizontalLayout->setContentsMargins(0, 0, 0, 0);
         widget = new QWidget(CUdpCommunication);
         widget->setObjectName(QStringLiteral("widget"));
         verticalLayout_2 = new QVBoxLayout(widget);
@@ -110,6 +113,11 @@ public:
 
 
         verticalLayout_2->addWidget(widget_2);
+
+        widget_wave = new QWidget(widget);
+        widget_wave->setObjectName(QStringLiteral("widget_wave"));
+
+        verticalLayout_2->addWidget(widget_wave);
 
 
         horizontalLayout->addWidget(widget);

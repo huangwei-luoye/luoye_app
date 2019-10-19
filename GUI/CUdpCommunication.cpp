@@ -10,6 +10,7 @@
 #include "UtilityClasses/CSetting.h"
 #include <QDebug>
 #include <QMessageBox>
+#include <QVBoxLayout>
 
 
 CUdpCommunication::CUdpCommunication(QWidget *parent) :
@@ -18,11 +19,18 @@ CUdpCommunication::CUdpCommunication(QWidget *parent) :
 {
     ui->setupUi(this);
     isConnect = false;
-    QcharWiget *pCharWiget = QcharWiget::getInstance();
+
+    QVBoxLayout *pVBoxLayout = new QVBoxLayout(ui->widget_wave);
+    QcharWiget *pCharWiget = new QcharWiget();
+    pVBoxLayout->addWidget(pCharWiget);
+    pVBoxLayout->setMargin(0);
+    ui->widget_wave->setLayout(pVBoxLayout);
+
 
     connect(this, SIGNAL(InitThreadSignal()), &m_RecvCollectThread, SLOT(OnInitThread()),Qt::QueuedConnection);
     connect(this, SIGNAL(StartRecvSignal()), &m_RecvCollectThread, SLOT(OnStartRecv()));
     connect(this, SIGNAL(StopRecvSignal()), &m_RecvCollectThread, SLOT(OnStopRecv()));
+    connect(&m_RecvCollectThread, SIGNAL(WaveDataSignal(QByteArray, bool)), pCharWiget, SLOT(OnWaveData(QByteArray,bool)));
     connect(&m_RecvCollectThread,SIGNAL(CollectDataFinishSignal(bool)), this, SLOT(OnCollectDataFinish(bool)));
     connect(&m_RecvCollectThread, SIGNAL(updateProgressSignal(quint32, quint32)), this, SLOT(OnUpdateProgress(quint32, quint32)));
     connect(this,SIGNAL(ClosePaintSignal()), pCharWiget, SLOT(OnClosePaint()));

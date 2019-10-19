@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <ControlSercice/RecvCollectDataThread.h>
 #include <UtilityClasses/CWaitObjectManager.h>
+#include "GUI/QcharWiget.h"
 
 
 const static quint16 TryCount = 2;
@@ -37,6 +38,7 @@ private:
     Ui::CUdpCommunication *ui;
     bool isConnect;
     RecvCollectDataThread m_RecvCollectThread;
+    QcharWiget *m_pWaveWiget;
 
     bool processAckProtocol(const QByteArray &data);
     void SendCmdToTdsBoard(quint8 cmd);

@@ -53,7 +53,7 @@ void UdpUpdateController::OnProcessRecvData(const QByteArray &udpData)
         m_currentPkgIndex++;
         if(ProtocolHead.allFrameCnt-1 >= ProtocolHead.currentFramNum)
         {
-            //m_point += QByteArray(udpData.data()+sizeof(MsgUdpDataAckProtocol),length-sizeof(MsgUdpDataAckProtocol)-sizeof(quint32)-sizeof(quint8));
+            m_point += QByteArray(udpData.data()+sizeof(MsgUdpDataAckProtocol),length-sizeof(MsgUdpDataAckProtocol)-sizeof(quint32)-sizeof(quint8));
 
             emit UpdateProgressSignal(ProtocolHead.allFrameCnt, ProtocolHead.currentFramNum+1);
 
@@ -70,13 +70,13 @@ void UdpUpdateController::OnProcessRecvData(const QByteArray &udpData)
             if((quint64)m_point.size() > ProtocolHead.allPoint)
             {
 
-                //emit RecvCollectDataSignal(m_point, isEnd, ProtocolHead.allFrameCnt-m_currentPkgIndex);
+                emit RecvCollectDataSignal(m_point, isEnd, ProtocolHead.allFrameCnt-m_currentPkgIndex);
                 QByteArray pointData = QByteArray(m_point.data()+ProtocolHead.allPoint, m_point.size()-ProtocolHead.allPoint);
                 m_point = pointData;
             }
             else
             {
-                //emit RecvCollectDataSignal(m_point,isEnd, ProtocolHead.allFrameCnt-m_currentPkgIndex);
+                emit RecvCollectDataSignal(m_point,isEnd, ProtocolHead.allFrameCnt-m_currentPkgIndex);
                 m_point.clear();
             }
             if(isEnd)

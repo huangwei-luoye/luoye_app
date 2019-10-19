@@ -15,19 +15,27 @@
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout" stretch="2,1">
+    <property name="spacing">
+     <number>0</number>
+    </property>
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
     <item>
-     <layout class="QVBoxLayout" name="verticalLayout_2" stretch="1,1">
-      <item>
-       <widget class="QWidget" name="widget_udpCommunication" native="true">
-        <property name="enabled">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QWidget" name="widget_waveShow" native="true"/>
-      </item>
-     </layout>
+     <widget class="QWidget" name="widget_udpCommunication" native="true">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+     </widget>
     </item>
     <item>
      <widget class="QWidget" name="widget_log" native="true">

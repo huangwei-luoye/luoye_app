@@ -25,9 +25,7 @@ class Ui_MainWindow
 public:
     QWidget *centralWidget;
     QVBoxLayout *verticalLayout;
-    QVBoxLayout *verticalLayout_2;
     QWidget *widget_udpCommunication;
-    QWidget *widget_waveShow;
     QWidget *widget_log;
 
     void setupUi(QMainWindow *MainWindow)
@@ -38,27 +36,15 @@ public:
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         verticalLayout = new QVBoxLayout(centralWidget);
-        verticalLayout->setSpacing(6);
+        verticalLayout->setSpacing(0);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
-        verticalLayout_2 = new QVBoxLayout();
-        verticalLayout_2->setSpacing(6);
-        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
+        verticalLayout->setContentsMargins(0, 0, 0, 0);
         widget_udpCommunication = new QWidget(centralWidget);
         widget_udpCommunication->setObjectName(QStringLiteral("widget_udpCommunication"));
         widget_udpCommunication->setEnabled(true);
 
-        verticalLayout_2->addWidget(widget_udpCommunication);
-
-        widget_waveShow = new QWidget(centralWidget);
-        widget_waveShow->setObjectName(QStringLiteral("widget_waveShow"));
-
-        verticalLayout_2->addWidget(widget_waveShow);
-
-        verticalLayout_2->setStretch(0, 1);
-        verticalLayout_2->setStretch(1, 1);
-
-        verticalLayout->addLayout(verticalLayout_2);
+        verticalLayout->addWidget(widget_udpCommunication);
 
         widget_log = new QWidget(centralWidget);
         widget_log->setObjectName(QStringLiteral("widget_log"));

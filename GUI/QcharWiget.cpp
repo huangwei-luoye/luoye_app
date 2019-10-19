@@ -28,6 +28,7 @@ QcharWiget::QcharWiget(QWidget *parent) :
 QcharWiget::~QcharWiget()
 {
     delete ui;
+    qDebug()<<"xigou 5";
 }
 
 QcharWiget *QcharWiget::getInstance()

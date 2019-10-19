@@ -33,6 +33,7 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
+    qDebug()<<"xigou 3";
 }
 
 void MainWindow::initUI()
@@ -47,12 +48,8 @@ void MainWindow::initUI()
     pVBoxLayout = new QVBoxLayout(ui->widget_udpCommunication);
     CUdpCommunication *pCudpCommunication = new CUdpCommunication;
     pVBoxLayout->addWidget(pCudpCommunication);
+    pVBoxLayout->setMargin(0);
     ui->widget_udpCommunication->setLayout(pVBoxLayout);
-
-    pVBoxLayout = new QVBoxLayout(ui->widget_waveShow);
-    QcharWiget *pCharwiget = QcharWiget::getInstance();
-    pVBoxLayout->addWidget(pCharwiget);
-    ui->widget_waveShow->setLayout(pVBoxLayout);
 
     QFile styleSheet(CQssFileAdaption::getInstance()->getMainWindow());
     if(styleSheet.open(QIODevice::ReadOnly))

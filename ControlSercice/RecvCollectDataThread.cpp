@@ -18,6 +18,7 @@ RecvCollectDataThread::RecvCollectDataThread(QObject *parent) :
     connect(m_pTimer, SIGNAL(timeout()), m_pLoop, SLOT(quit()));
     this->moveToThread(&m_workThread);
     m_workThread.start();
+
 }
 
 RecvCollectDataThread::~RecvCollectDataThread()
@@ -35,13 +36,11 @@ RecvCollectDataThread::~RecvCollectDataThread()
         delete m_pUdpUpdateCtr;
         m_pUdpUpdateCtr = nullptr;
     }
-    //qDebug()<<"xigou";
+    qDebug()<<"xigou1";
 }
 
 void RecvCollectDataThread::OnInitThread()
 {
-    QcharWiget *pChar = QcharWiget::getInstance();
-
     if(!m_pFileOperate)
     {
         m_pFileOperate = new ExperimentFileOperat;
@@ -56,7 +55,6 @@ void RecvCollectDataThread::OnInitThread()
     connect(m_pUdpUpdateCtr, SIGNAL(RecvCollectDataSignal(QByteArray,bool,int)), this, SLOT(OnRecvCollectData(QByteArray, bool, int)));
     connect(m_pUdpUpdateCtr, SIGNAL(ResetTimerSignal()), this, SLOT(OnResetTimer()));
     connect(this, SIGNAL(OperatResultDataSignal(quint8, QByteArray , bool)), m_pFileOperate, SLOT(OnOperatResultData(quint8, QByteArray , bool)));
-    connect(this, SIGNAL(WaveDataSignal(QByteArray, bool)), pChar, SLOT(OnWaveData(QByteArray,bool)));
     connect(m_pFileOperate, SIGNAL(OperatFinishSignal(quint8)), this, SLOT(OnOperatFinish(quint8)));
     LogOperate::getinstance()->LogOperaterUi(QString("正在接收回波数据中！"), LOG_INFO);
 }

@@ -14,12 +14,14 @@ CWaveDataPraseThread::CWaveDataPraseThread(QObject *parent) : QObject(parent)
     connect(m_pTimer, SIGNAL(timeout()), this, SLOT(OnProcessData()));
     this->moveToThread(&m_workThread);
     m_workThread.start();
+    qDebug()<<"gouzao1";
 }
 
 CWaveDataPraseThread::~CWaveDataPraseThread()
 {
     m_workThread.quit();
     m_workThread.wait();
+    qDebug()<<"xigou2";
 }
 /**
  * @brief CWaveDataPraseThread::OnSourceWave解析处理数据
