@@ -12,7 +12,7 @@ RecvCollectDataThread::RecvCollectDataThread(QObject *parent) :
     m_pTimer = new QTimer(this);
     m_pLoop = new QEventLoop(this);
 
-    m_pTimer->setInterval(1000*20);
+    m_pTimer->setInterval(1000*10);
     m_pTimer->setSingleShot(true);
 
     connect(m_pTimer, SIGNAL(timeout()), m_pLoop, SLOT(quit()));
@@ -55,6 +55,7 @@ void RecvCollectDataThread::OnInitThread()
     connect(m_pUdpUpdateCtr, SIGNAL(ResetTimerSignal()), this, SLOT(OnResetTimer()));
     connect(this, SIGNAL(OperatResultDataSignal(quint8, QByteArray , bool)), m_pFileOperate, SLOT(OnOperatResultData(quint8, QByteArray , bool)));
     connect(m_pFileOperate, SIGNAL(OperatFinishSignal(quint8)), this, SLOT(OnOperatFinish(quint8)));
+    connect(this,SIGNAL(OpreatCloseFileSignal()),m_pFileOperate,SLOT(OnOpreatCloseFile()));
     LogOperate::getinstance()->LogOperaterUi(QString("正在接收回波数据中！"), LOG_INFO);
 }
 

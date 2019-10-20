@@ -51,6 +51,7 @@ private:
     Q_SLOT void OnUpdateProgress(quint32 maxPkg, quint32 currentIndex);
     Q_SLOT void OnCollectDataFinish(bool isSuccess);
     Q_SLOT void OnEnablePushButton();
+    Q_SLOT void OnProcessTdsUdpData(const QByteArray &data);
 
 
 };

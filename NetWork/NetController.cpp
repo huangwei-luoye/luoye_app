@@ -1,17 +1,22 @@
 #include "NetController.h"
 #include "QDebug"
 #include "UtilityClasses/CTools.h"
+#include "UtilityClasses/CTools.h"
 #include <QDir>
 #include <QDateTime>
+
+#define USE_LIBUV
 
 NetController::NetController()
 {
     m_pTcpSocket = nullptr;
     m_pUdpSocket = nullptr;
-//    if(!QDir("./log/").exists())
-//    {
-//        QDir().mkpath("./log/");
-//    }
+    m_pLibuvSocket = nullptr;
+    m_isBindSuccess = false;
+    if(!QDir("./log/").exists())
+    {
+        QDir().mkpath("./log/");
+    }
 
 }
 
@@ -22,10 +27,25 @@ NetController::~NetController()
         delete m_pUdpSocket;
         m_pUdpSocket = nullptr;
     }
+    if(m_pLibuvSocket)
+    {
+        delete m_pLibuvSocket;
+        m_pUdpSocket = nullptr;
+    }
 }
 
 bool NetController::OnOpenUdpNetwork(const QString &localIp, quint16 localPort)
 {
+#ifdef USE_LIBUV
+
+    m_pLibuvSocket = new Udp(this);
+    m_pLibuvSocket->bind(localIp, localPort);
+    m_pLibuvSocket->startRecv();
+
+    connect(m_pLibuvSocket,SIGNAL(bindSuccessed()),this, SLOT(OnBindSuccessed()));
+    connect(m_pLibuvSocket, SIGNAL(recvData(QByteArray)),this, SLOT(OnRecvData(QByteArray)));
+    CTools::Delay(100);
+#else
     m_pUdpSocket = new QUdpSocket(this);
     QHostAddress hostAddr;
     hostAddr.setAddress(localIp);
@@ -34,6 +54,7 @@ bool NetController::OnOpenUdpNetwork(const QString &localIp, quint16 localPort)
 
     connect(m_pUdpSocket, SIGNAL(readyRead()), this, SLOT(OnProcessUdpReadData()));
     connect(m_pUdpSocket, SIGNAL(disconnected()), m_pUdpSocket, SLOT(deleteLater()));
+#endif
 
 //    if(m_logFile.isOpen())
 //    {
@@ -44,7 +65,7 @@ bool NetController::OnOpenUdpNetwork(const QString &localIp, quint16 localPort)
 //    m_logFile.setFileName(fileName);
 //    m_logFile.open(QIODevice::WriteOnly | QIODevice::Text);
 
-    return ret;
+    return m_isBindSuccess;
 
 }
 
@@ -59,6 +80,7 @@ void NetController::OnCloseUdpNetWorke()
 
 void NetController::OnProcessUdpReadData()
 {
+
     while(m_pUdpSocket->hasPendingDatagrams())
     {
         QByteArray udpData;
@@ -69,7 +91,8 @@ void NetController::OnProcessUdpReadData()
         m_pUdpSocket->readDatagram(udpData.data(),udpData.size(), &host, &port);
 
         emit UdpProcessReciveDataSignal(udpData);
-        //qDebug()<<CTools::ByteArrayToString(udpData);
+
+        //qDebug()<<CTools::ByteArrayToString(udpData)<<"\n";
 //        QString log = CTools::ByteArrayToString(udpData);
 //        if(!log.isEmpty())
 //        {
@@ -91,6 +114,12 @@ void NetController::OnProcessUdpReadData()
  */
 void NetController::OnSendUdpData(const QByteArray &data, const QString ip, quint16 port)
 {
+
+#ifdef USE_LIBUV
+
+    m_pLibuvSocket->sendTo(ip,port,data);
+
+#else
     //1. 发送数据
     int sendSize = m_pUdpSocket->writeDatagram(data, data.length(), QHostAddress(ip), port);
 
@@ -119,5 +148,26 @@ void NetController::OnSendUdpData(const QByteArray &data, const QString ip, quin
         }
         emit NetWorkErrSignal(ErrWrite);
     }
+#endif
+}
 
+void NetController::OnBindSuccessed()
+{
+    //qDebug()<<"bind successed\n";
+    m_isBindSuccess = true;
+}
+
+void NetController::OnRecvData(const QByteArray &data)
+{
+      emit UdpProcessReciveDataSignal(data);
+
+//    QString log = CTools::ByteArrayToString(data);
+//    if(!log.isEmpty())
+//    {
+//        if(m_logFile.isOpen())
+//        {
+//            m_logFile.write(QString(log+"\n").toStdString().c_str());
+//            m_logFile.flush();
+//        }
+//    }
 }

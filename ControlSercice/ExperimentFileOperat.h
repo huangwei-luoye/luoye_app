@@ -21,8 +21,10 @@ private:
     QMap <quint8, QFile*> m_FileMap;
     QMap <quint8, QString > m_FileNameMap;
 
+    Q_SLOT void OnOpreatCloseFile();
     Q_SLOT void OnOperatResultData(quint8 channel, const QByteArray &data, bool isEnd);
     Q_SIGNAL void OperatFinishSignal(quint8 channel);
+
 };
 
 #endif // EXPERIMENTFILEOPERAT_H

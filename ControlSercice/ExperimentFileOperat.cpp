@@ -14,7 +14,7 @@ ExperimentFileOperat::ExperimentFileOperat(QObject *parent) :
 ExperimentFileOperat::~ExperimentFileOperat()
 {
     QMap<quint8, QFile*> ::iterator it;
-    for(it = m_FileMap.begin(); it!=m_FileMap.begin(); ++it)
+    for(it = m_FileMap.begin(); it!=m_FileMap.end(); ++it)
     {
        QFile *pFile = it.value();
        if(pFile && pFile->isOpen())
@@ -27,6 +27,21 @@ ExperimentFileOperat::~ExperimentFileOperat()
     m_FileMap.clear();
     m_WorkThread.quit();
     m_WorkThread.wait();
+}
+
+void ExperimentFileOperat::OnOpreatCloseFile()
+{
+    QMap<quint8, QFile*> ::iterator it;
+    for(it = m_FileMap.begin(); it!=m_FileMap.end();++it)
+    {
+        QFile *pFile = it.value();
+        if(pFile && pFile->isOpen())
+        {
+            pFile->close();
+            delete pFile;
+            pFile = nullptr;
+        }
+    }
 }
 
 void ExperimentFileOperat::OnOperatResultData(quint8 channel, const QByteArray &data, bool isEnd)

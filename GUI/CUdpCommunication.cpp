@@ -20,6 +20,7 @@ CUdpCommunication::CUdpCommunication(QWidget *parent) :
     ui->setupUi(this);
     isConnect = false;
 
+    DeviceController *pDeviceCtr = DeviceController::getInstance();
     QVBoxLayout *pVBoxLayout = new QVBoxLayout(ui->widget_wave);
     QcharWiget *pCharWiget = new QcharWiget();
     pVBoxLayout->addWidget(pCharWiget);
@@ -34,6 +35,9 @@ CUdpCommunication::CUdpCommunication(QWidget *parent) :
     connect(&m_RecvCollectThread,SIGNAL(CollectDataFinishSignal(bool)), this, SLOT(OnCollectDataFinish(bool)));
     connect(&m_RecvCollectThread, SIGNAL(updateProgressSignal(quint32, quint32)), this, SLOT(OnUpdateProgress(quint32, quint32)));
     connect(this,SIGNAL(ClosePaintSignal()), pCharWiget, SLOT(OnClosePaint()));
+    connect(pDeviceCtr,SIGNAL(ProcessTdsUdpDataSignal(QByteArray)), this, SLOT(OnProcessTdsUdpData(QByteArray)));
+
+
 
     QFile styleSheet(CQssFileAdaption::getInstance()->getCommunication());
     if(styleSheet.open(QIODevice::ReadOnly))
@@ -100,8 +104,8 @@ void CUdpCommunication::on_pushButton_connect_clicked()
 
 void CUdpCommunication::OnDealRecvUdpData(const QByteArray &recvData)
 {
-    QString str = CTools::ByteArrayToString(recvData);
-    ui->textEdit_udpData->insertPlainText(str);
+    //QString str = CTools::ByteArrayToString(recvData);
+    //ui->textEdit_udpData->insertPlainText(str);
     if(processAckProtocol(recvData))
     {
         m_waitMgr.wakeOne(CMD_RESET);
@@ -127,6 +131,21 @@ void CUdpCommunication::OnCollectDataFinish(bool isSuccess)
 void CUdpCommunication::OnEnablePushButton()
 {
     ui->pushButton_connect->setEnabled(true);
+}
+
+void CUdpCommunication::OnProcessTdsUdpData(const QByteArray &data)
+{
+    QString showstr = nullptr;
+
+    MsgUdpDataAckProtocol Protocol;
+    memcpy(&Protocol, data.data(), sizeof(MsgUdpDataAckProtocol));
+    Protocol.head = qFromBigEndian(Protocol.head);
+    if(Protocol.head == UdpProtocolAckHead)
+    {
+        return;
+    }
+    showstr = CTools::ByteArrayToString(data);
+    ui->textEdit_udpData->insertPlainText(showstr+"\n");
 }
 
 void CUdpCommunication::on_pushButton_clearAll_clicked()
